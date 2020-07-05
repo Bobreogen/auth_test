@@ -1,7 +1,12 @@
 package main
 
 import (
+	"context"
+	"fmt"
 	"github.com/gorilla/mux"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
+	"log"
 	"net/http"
 	"os"
 )
@@ -23,6 +28,24 @@ func main() {
 	r.Handle("/delete-tokens", NotImplemented).Methods("DELETE")
 
 	http.ListenAndServe(":" + port, r)
+
+	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb+srv://admin:adminadmin@bobreogen.vmkfp.mongodb.net/admin?retryWrites=true&w=majority"))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = client.Connect(context.TODO())
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = client.Ping(context.TODO(), nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("Connected to MongoDB!")
+	_ = client.Database("Admin").Collection("users")
 }
 
 var NotImplemented = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request){
