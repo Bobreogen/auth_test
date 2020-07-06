@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -38,14 +37,14 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	err = client.Ping(context.TODO(), nil)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println("Connected to MongoDB!")
-	_ = client.Database("Admin").Collection("users")
+	//
+	//err = client.Ping(context.TODO(), nil)
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+	//
+	//fmt.Println("Connected to MongoDB!")
+	//_ = client.Database("Admin").Collection("users")
 }
 
 var NotImplemented = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request){
