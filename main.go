@@ -70,7 +70,7 @@ var get = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request){
 		if err != nil {
 			panic(err)
 		}
-		_, _ = w.Write([]byte("GUID: " + r.FormValue("GUID") + "\naccess token: " + acStr + "\nrefresh token: " + reStr))
+		_, _ = w.Write([]byte("access token: " + acStr + "\nrefresh token: " + reStr))
 	} else {
 		_, _ = w.Write([]byte("Don't get a GUID"))
 	}
